@@ -605,7 +605,7 @@ fn main() {
     // The above doesn't apply with data types :
     // Integers, bool, char, floats, tuples with the above data types only
 
-    // Here the string was borrowed by the function
+    // Here the ownership of the string was taken by the function
     let str3: String = String::from("World");
     print_str(str3);
 
