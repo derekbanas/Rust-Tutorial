@@ -241,6 +241,7 @@ fn main() {
 
     // Booleans can have either the value true or false
     let _is_true = true;
+    // Prefixing with an underscore means the variable may no longer be used
 
     // Characters are defined with single quotes
     // They can store most any type of character from any language
@@ -481,7 +482,7 @@ fn main() {
         }
     }
 
-    // Use enum to store todays day
+    // Use enum to store today's day
     let today:Day = Day::Monday;
 
     // Perform different actions based on day
@@ -507,6 +508,9 @@ fn main() {
 
     // Create a vector with defined values
     let mut vec2 = vec![1, 2, 3, 4];
+
+    // Create a vector with defined values (2) and specific length (20)
+    let _vec3 = vec![2; 20];
 
     // Add values to the end of a vector
     vec2.push(5);
@@ -536,6 +540,9 @@ fn main() {
 
     // Remove and return the last value
     println!("Pop {:?}", vec2.pop());
+
+    // Remove and return the ith value
+    println!("Remove {:?}", vec2.remove(1));
 
 // START HERE
 
@@ -619,6 +626,23 @@ fn main() {
     let mut str6: String = String::from("Derek");
     change_string(&mut str6);
 
+    let str7 = &mut str6;
+    println!("{}", str7);
+
+    let str8 = &mut str6;
+    // This throws an error because we borrow str6 as mutable more than once at a time
+    // println!("{}, {}", str7, str8);
+
+    println!("{}", str8); // no problem
+
+    let str9 = &str6;
+    // This throws an error because we borrow str6 as immutable which is also borrowed as mutable
+    // println!("{}, {}", str8, str9);
+
+    // RULES
+    // 1. A reference’s scope starts from where it is introduced to the last time use.
+    // 2. Anytime, you can have either one mutable reference or any number of immutable references.
+
     // ----- HASH MAPS -----
     // Hash maps are used to store key / value pairs
     use std::collections::HashMap;
@@ -647,6 +671,22 @@ fn main() {
             Some(_x) => println!("Batman is a hero"),
             None => println!("Batman is not a hero"),
         }
+    }
+
+
+    // Change the value with key
+    if let Some(x) = heroes.get_mut(&"Superman") {
+        // We can use if let to match one pattern while ignoring the rest
+
+        // To reach the place where the mutable reference x is,
+        // we use *x, which is called dereferencing
+        *x = "Kirk Alyn";
+    }
+
+    // The above is equivalent to the following code
+    match heroes.get_mut(&"Superman") {
+        Some(x) => *x = "Kirk Alyn",
+        _ => (),
     }
 
     // ----- STRUCTS -----
