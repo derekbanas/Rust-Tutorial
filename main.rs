@@ -689,6 +689,12 @@ fn main() {
         _ => (),
     }
 
+    // Remove the value with key
+    match heroes.remove(&"Batman") {
+        Some(x) => println!("{}, Have a good day", x),
+        None => println!("Batman is not a hero"),
+    }
+
     // ----- STRUCTS -----
     // A struct is a custom data type that stores multiple
     // types of data
